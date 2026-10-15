@@ -1,0 +1,108 @@
+﻿<Window x:Class="KsiazkaKsiegowegoWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Closing="Window_Closing"
+        Title="KsiążkaKsiegowego" Height="350" Width="650">
+    <Window.Resources>
+        <CollectionViewSource x:Key="FirmyViewSource" Source="{Binding Firmy}" />
+    </Window.Resources>
+
+
+    <Grid>
+        <TabControl>
+            <TabItem Header="Moduł 1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <ListView Name="FirmaListView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" 
+                              ItemsSource="{Binding Source={StaticResource FirmyViewSource}}">
+
+                        <ListView.View>
+                            <GridView >
+                                <GridViewColumn Header="Nazwa" Width="150" DisplayMemberBinding="{Binding Nazwa}" />
+                                <GridViewColumn Header="Dostarczone Dokumenty" Width="135">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox Content="{Binding DataZaznaczenia, StringFormat='Data zaznaczenia: {0:dd/MM/yyyy HH:mm:ss}'}" IsChecked="{Binding CzyZaznaczone}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"
+                                                      ToolTip="{Binding DataZaznaczenia, StringFormat='Data zaznaczenia: {0:dd/MM/yyyy HH:mm:ss}'}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Wiadomość Wysłana" Width="135">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox Content="{Binding DataWiadomosci, StringFormat='Data wysłania: {0:dd/MM/yyyy HH:mm:ss}'}" IsChecked="{Binding CzyWiadomoscWyslana}" Checked="CheckBox_Wiadomosc_Checked" Unchecked="CheckBox_Wiadomosc_Unchecked"
+                                                      ToolTip="{Binding DataWiadomosci, StringFormat='Data wysłania: {0:dd/MM/yyyy HH:mm:ss}'}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Notatka" Width="Auto">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBlock MinWidth="250" Width="Auto" Text="{Binding Notatka}" VerticalAlignment="Center" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                        <Button Content="Dodaj firmę" Click="DodajFirme_Click"/>
+                    </StackPanel>
+                    
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
+                        <ComboBox Name="MiesiacComboBox" Grid.Row="0" Width="100" Margin="10,0,0,0" SelectedIndex="0">
+                            <ComboBoxItem>1</ComboBoxItem>
+                            <ComboBoxItem>2</ComboBoxItem>
+                            <ComboBoxItem>3</ComboBoxItem>
+                            <ComboBoxItem>4</ComboBoxItem>
+                            <ComboBoxItem>5</ComboBoxItem>
+                            <ComboBoxItem>6</ComboBoxItem>
+                            <ComboBoxItem>7</ComboBoxItem>
+                            <ComboBoxItem>8</ComboBoxItem>
+                            <ComboBoxItem>9</ComboBoxItem>
+                            <ComboBoxItem>10</ComboBoxItem>
+                            <ComboBoxItem>11</ComboBoxItem>
+                            <ComboBoxItem>12</ComboBoxItem>
+                        </ComboBox>
+
+                        <ComboBox Name="RokComboBox" Grid.Row="0" Width="100" Margin="10,0,0,0" SelectedIndex="0" >
+                            <ComboBoxItem>2023</ComboBoxItem>
+                            <ComboBoxItem>2024</ComboBoxItem>
+                            <ComboBoxItem>2025</ComboBoxItem>
+                            <ComboBoxItem>2026</ComboBoxItem>
+                            <ComboBoxItem>2027</ComboBoxItem>
+                            <ComboBoxItem>2028</ComboBoxItem>
+                            <ComboBoxItem>2029</ComboBoxItem>
+                            <ComboBoxItem>2030</ComboBoxItem>
+                        </ComboBox>
+                    </StackPanel >
+
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Moduł 2">
+                <Grid>
+                    <!-- Kontrolki dla modułu 2 -->
+                </Grid>
+            </TabItem>
+            <TabItem Header="Moduł 3" Name="Modul1Tab">
+                <Grid>
+                    <TextBlock x:Name="TextBlock" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontSize="16" TextWrapping="Wrap"/>
+                    <Button Content="←" Name="StrzalkaLewo" Click="StrzalkaLewo_Click" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" Visibility="Hidden" Grid.Column="0" FontSize="24" Width="40" Height="40"/>
+                    <Button Content="→" Name="StrzalkaPrawo" Click="StrzalkaPrawo_Click" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0" Grid.Column="1" FontSize="24" Width="40" Height="40"/>
+                    <Button Content="Dodaj stronę" Name="DodajStroneButton" Click="DodajStroneButton_Click" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,10" FontSize="16"/>
+                    <Button Content="Usuń stronę" Name="UsunStroneButton" Click="UsunStroneButton_Click" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10" FontSize="16"/>
+                </Grid>
+            </TabItem>
+
+
+        </TabControl>
+    </Grid>
+</Window>

@@ -1,0 +1,10 @@
+**/bin/
+**/obj/
+**/TestResults/
+.vs/
+.refact/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+**/Properties/PublishProfiles/*.pubxml
